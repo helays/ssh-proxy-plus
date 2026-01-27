@@ -1,2 +1,6 @@
-
-.DS_Store
+/runtime/
+/.idea/
+/dist/html/
+/frontend/node_modules
+/go.work
+/go.work.sum
