@@ -17,6 +17,6 @@ v2版本优化了代理链的重连与关断。
 
 ### 源码编译
 ``` shell
-git clone https://github.com/helays/ssh.proxy
+git clone https://github.com/helays/ssh-proxy-plus
 make build
 ```
