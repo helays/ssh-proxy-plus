@@ -1,10 +1,11 @@
 package api
 
 import (
+	"regexp"
+
 	"github.com/helays/ssh-proxy-plus/configs"
 	"github.com/helays/ssh-proxy-plus/dist"
 	"github.com/helays/ssh-proxy-plus/internal/api/controller"
-	"regexp"
 )
 
 func InitRouter() {

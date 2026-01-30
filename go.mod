@@ -7,9 +7,9 @@ require (
 	github.com/alibabacloud-go/ecs-20140526/v4 v4.26.10
 	github.com/alibabacloud-go/tea v1.4.0
 	github.com/alibabacloud-go/tea-utils/v2 v2.0.9
-	github.com/alibabacloud-go/vpc-20160428/v6 v6.14.0
+	github.com/alibabacloud-go/vpc-20160428/v6 v6.16.0
 	github.com/dchest/captcha v1.1.0
-	github.com/helays/utils/v2 v2.3.1-0.20260127071955-63f03f2285f8
+	github.com/helays/utils/v2 v2.3.1
 	golang.org/x/crypto v0.47.0
 	golang.org/x/net v0.49.0
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
@@ -23,7 +23,7 @@ require (
 	github.com/alibabacloud-go/debug v1.0.1 // indirect
 	github.com/alibabacloud-go/endpoint-util v1.1.1 // indirect
 	github.com/alibabacloud-go/openapi-util v0.1.2 // indirect
-	github.com/aliyun/credentials-go v1.4.10 // indirect
+	github.com/aliyun/credentials-go v1.4.11 // indirect
 	github.com/araddon/dateparse v0.0.0-20210429162001-6b43995a97de // indirect
 	github.com/cespare/xxhash/v2 v2.3.0 // indirect
 	github.com/clbanning/mxj/v2 v2.7.0 // indirect
