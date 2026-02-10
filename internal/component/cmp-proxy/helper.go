@@ -2,14 +2,17 @@ package cmp_proxy
 
 import (
 	"bytes"
+	"context"
 	"errors"
 	"fmt"
-	"github.com/helays/ssh-proxy-plus/internal/cache"
-	"github.com/helays/ssh-proxy-plus/internal/model"
 	"io"
 	"net"
 	"strconv"
 	"strings"
+	"time"
+
+	"github.com/helays/ssh-proxy-plus/internal/cache"
+	"github.com/helays/ssh-proxy-plus/internal/model"
 
 	"github.com/helays/utils/v2/close/vclose"
 	"github.com/helays/utils/v2/logger/ulogs"
@@ -95,14 +98,23 @@ func killProcess(client *ssh.Client, pid int) error {
 
 // 这是双向数据转发，对于其中一方Copy结束时，另一方都应该关闭资源。
 func transfer(dst net.Conn, src net.Conn) {
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 	go func() {
 		if _, err := io.Copy(dst, src); err != nil {
 			ulogs.Errorf("【transfer】 src = > dst %v", err)
 		}
+		cancel()
 	}()
-	if _, err := io.Copy(src, dst); err != nil {
-		ulogs.Errorf("【transfer】 dst = > src %v", err)
-	}
+	go func() {
+		if _, err := io.Copy(src, dst); err != nil {
+			ulogs.Errorf("【transfer】 dst = > src %v", err)
+		}
+		cancel()
+	}()
+	<-ctx.Done()
+	time.Sleep(100 * time.Millisecond) // 短暂等待100 ms
+
 }
 
 func FindConnectByID(id string) (result *model.Connect) {

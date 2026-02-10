@@ -27,14 +27,16 @@ $(info build time ${BuildTime})
 
 define LDFLAGS
 "-X 'github.com/helays/utils/v2.Version=${Version}' \
--X 'github.com/helays/utils/v2.BuildTime=${BuildTime}'"
+-X 'github.com/helays/utils/v2.BuildTime=${BuildTime}' \
+-linkmode external \
+-extldflags=-static"
 endef
 
 $(info build params ${LDFLAGS})
 
 BUILD_CMD = $(if $(IS_WINDOWS), \
     SET CGO_ENABLED=auto&SET GOOS=$(1)&SET GOARCH=$(2)&go build -tags "timetzdata $(if $(4),$(4))" -ldflags ${LDFLAGS} -o "${execOut}/${outFile}-${2}$(if $(findstring dev,$(4)),,-static)${lic_suffix}-${Version}" $(3), \
-    CGO_ENABLED=auto GOOS=$(1) GOARCH=$(2) go build -tags "timetzdata $(if $(4),$(4))" -ldflags ${LDFLAGS} -o "${execOut}/${outFile}-${2}$(if $(findstring dev,$(4)),,-static)${lic_suffix}-${Version}" $(3))
+    CGO_ENABLED=auto CC=x86_64-linux-musl-gcc GOOS=$(1) GOARCH=$(2) go build -tags "timetzdata $(if $(4),$(4))" -ldflags ${LDFLAGS} -o "${execOut}/${outFile}-${2}$(if $(findstring dev,$(4)),,-static)${lic_suffix}-${Version}" $(3))
 
 $(info prepare build)
 
