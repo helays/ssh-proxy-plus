@@ -6,8 +6,8 @@ import (
 	"github.com/helays/ssh-proxy-plus/internal/model"
 	"net/http"
 
-	"github.com/helays/utils/v2/net/http/request"
-	"github.com/helays/utils/v2/net/http/response"
+	"helay.net/go/utils/v3/net/http/request"
+	"helay.net/go/utils/v3/net/http/response"
 )
 
 func (c *Controller) CtlSysConfig(w http.ResponseWriter, r *http.Request) {

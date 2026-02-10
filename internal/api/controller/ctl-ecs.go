@@ -11,9 +11,9 @@ import (
 	util "github.com/alibabacloud-go/tea-utils/v2/service"
 	"github.com/alibabacloud-go/tea/tea"
 	vpc20160428 "github.com/alibabacloud-go/vpc-20160428/v6/client"
-	"github.com/helays/utils/v2/net/http/httpkit"
-	"github.com/helays/utils/v2/net/http/request"
-	"github.com/helays/utils/v2/net/http/response"
+	"helay.net/go/utils/v3/net/http/httpkit"
+	"helay.net/go/utils/v3/net/http/request"
+	"helay.net/go/utils/v3/net/http/response"
 )
 
 // CtlDescribeRegions 获取实例可用区

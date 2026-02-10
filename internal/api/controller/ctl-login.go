@@ -10,10 +10,10 @@ import (
 	"time"
 
 	"github.com/dchest/captcha"
-	"github.com/helays/utils/v2/crypto/rsaV2"
-	"github.com/helays/utils/v2/net/http/httpServer/router"
-	"github.com/helays/utils/v2/net/http/response"
-	"github.com/helays/utils/v2/net/http/session"
+	"helay.net/go/utils/v3/crypto/rsaV2"
+	"helay.net/go/utils/v3/net/http/httpServer/router"
+	"helay.net/go/utils/v3/net/http/response"
+	"helay.net/go/utils/v3/net/http/session"
 )
 
 func (c *Controller) CtlLogin(w http.ResponseWriter, r *http.Request) {

@@ -9,12 +9,12 @@ require (
 	github.com/alibabacloud-go/tea-utils/v2 v2.0.9
 	github.com/alibabacloud-go/vpc-20160428/v6 v6.16.0
 	github.com/dchest/captcha v1.1.0
-	github.com/helays/utils/v2 v2.3.1
-	golang.org/x/crypto v0.47.0
-	golang.org/x/net v0.49.0
+	golang.org/x/crypto v0.48.0
+	golang.org/x/net v0.50.0
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 	gorm.io/datatypes v1.2.7
 	gorm.io/gorm v1.31.1
+	helay.net/go/utils/v3 v3.0.0
 )
 
 require (
@@ -53,9 +53,9 @@ require (
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.27.1 // indirect
 	go4.org/netipx v0.0.0-20231129151722-fdeea329fbba // indirect
-	golang.org/x/exp v0.0.0-20260112195511-716be5621a96 // indirect
-	golang.org/x/sys v0.40.0 // indirect
-	golang.org/x/text v0.33.0 // indirect
+	golang.org/x/exp v0.0.0-20260209203927-2842357ff358 // indirect
+	golang.org/x/sys v0.41.0 // indirect
+	golang.org/x/text v0.34.0 // indirect
 	gopkg.in/ini.v1 v1.67.1 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 	gorm.io/driver/mysql v1.6.0 // indirect

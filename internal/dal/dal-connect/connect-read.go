@@ -6,8 +6,8 @@ import (
 	"github.com/helays/ssh-proxy-plus/internal/dal"
 	"github.com/helays/ssh-proxy-plus/internal/model"
 
-	"github.com/helays/utils/v2/dataType"
-	"github.com/helays/utils/v2/logger/ulogs"
+	"helay.net/go/utils/v3/dataType"
+	"helay.net/go/utils/v3/logger/ulogs"
 )
 
 func SaveData(data *model.Connect, isNew bool) error {

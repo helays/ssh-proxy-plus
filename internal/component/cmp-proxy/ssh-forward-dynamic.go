@@ -8,7 +8,7 @@ import (
 	"io"
 	"net"
 
-	"github.com/helays/utils/v2/close/vclose"
+	"helay.net/go/utils/v3/close/vclose"
 )
 
 func (p *proxyConnect) forwardDynamic(conn net.Conn) {

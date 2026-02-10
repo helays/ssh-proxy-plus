@@ -5,9 +5,9 @@ import (
 	"github.com/helays/ssh-proxy-plus/internal/api/dto"
 	"net/http"
 
-	"github.com/helays/utils/v2/net/http/httpServer/router"
-	"github.com/helays/utils/v2/net/http/response"
-	"github.com/helays/utils/v2/net/http/session"
+	"helay.net/go/utils/v3/net/http/httpServer/router"
+	"helay.net/go/utils/v3/net/http/response"
+	"helay.net/go/utils/v3/net/http/session"
 )
 
 var frontendLists = []dto.FrontedResp{

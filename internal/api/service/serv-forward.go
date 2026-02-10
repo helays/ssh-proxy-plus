@@ -12,10 +12,10 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/helays/utils/v2/logger/ulogs"
-	"github.com/helays/utils/v2/tools"
 	"gopkg.in/mgo.v2/bson"
 	"gorm.io/gorm"
+	"helay.net/go/utils/v3/logger/ulogs"
+	"helay.net/go/utils/v3/tools"
 )
 
 type ForWardService struct {

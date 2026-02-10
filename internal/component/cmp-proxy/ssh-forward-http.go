@@ -8,10 +8,10 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/helays/utils/v2/close/httpClose"
-	"github.com/helays/utils/v2/close/vclose"
-	"github.com/helays/utils/v2/net/http/httpkit"
 	"golang.org/x/net/proxy"
+	"helay.net/go/utils/v3/close/httpClose"
+	"helay.net/go/utils/v3/close/vclose"
+	"helay.net/go/utils/v3/net/http/httpkit"
 )
 
 func (p *proxyConnect) forwardHTTP() {

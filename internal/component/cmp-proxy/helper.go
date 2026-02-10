@@ -14,9 +14,9 @@ import (
 	"github.com/helays/ssh-proxy-plus/internal/cache"
 	"github.com/helays/ssh-proxy-plus/internal/model"
 
-	"github.com/helays/utils/v2/close/vclose"
-	"github.com/helays/utils/v2/logger/ulogs"
 	"golang.org/x/crypto/ssh"
+	"helay.net/go/utils/v3/close/vclose"
+	"helay.net/go/utils/v3/logger/ulogs"
 )
 
 func checkPortAndGetPID(client *ssh.Client, port int) (int, error) {

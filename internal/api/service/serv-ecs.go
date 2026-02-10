@@ -18,10 +18,10 @@ import (
 	util "github.com/alibabacloud-go/tea-utils/v2/service"
 	"github.com/alibabacloud-go/tea/tea"
 	vpc20160428 "github.com/alibabacloud-go/vpc-20160428/v6/client"
-	"github.com/helays/utils/v2/logger/ulogs"
 	"gopkg.in/mgo.v2/bson"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
+	"helay.net/go/utils/v3/logger/ulogs"
 )
 
 type EcsService struct {

@@ -2,10 +2,10 @@ package model
 
 import (
 	"database/sql/driver"
-	"github.com/helays/utils/v2/dataType"
 	"gorm.io/datatypes"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
+	"helay.net/go/utils/v3/dataType"
 )
 
 type Disk struct {

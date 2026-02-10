@@ -4,7 +4,7 @@ import (
 	"github.com/helays/ssh-proxy-plus/internal/dal"
 	"github.com/helays/ssh-proxy-plus/internal/model"
 
-	"github.com/helays/utils/v2/db/userDb"
+	"helay.net/go/utils/v3/db/userDb"
 )
 
 func AutoMigrate() {

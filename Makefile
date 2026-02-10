@@ -26,8 +26,8 @@ $(info build version ${Version})
 $(info build time ${BuildTime})
 
 define LDFLAGS
-"-X 'github.com/helays/utils/v2.Version=${Version}' \
--X 'github.com/helays/utils/v2.BuildTime=${BuildTime}' \
+"-X 'helay.net/go/utils/v3.Version=${Version}' \
+-X 'helay.net/go/utils/v3.BuildTime=${BuildTime}' \
 -linkmode external \
 -extldflags=-static"
 endef

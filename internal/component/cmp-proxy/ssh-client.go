@@ -10,9 +10,9 @@ import (
 	"sync"
 	"time"
 
-	"github.com/helays/utils/v2/close/vclose"
-	"github.com/helays/utils/v2/tools/ringbuffer"
 	"golang.org/x/crypto/ssh"
+	"helay.net/go/utils/v3/close/vclose"
+	"helay.net/go/utils/v3/tools/ringbuffer"
 )
 
 func GetLogRingBuffer(id string) *ringbuffer.RingBuffer[Logs] {

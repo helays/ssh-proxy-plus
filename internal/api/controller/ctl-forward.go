@@ -6,8 +6,8 @@ import (
 	"github.com/helays/ssh-proxy-plus/internal/model"
 	"net/http"
 
-	"github.com/helays/utils/v2/net/http/response"
 	"golang.org/x/net/websocket"
+	"helay.net/go/utils/v3/net/http/response"
 )
 
 func (c *Controller) CtlForward(w http.ResponseWriter, r *http.Request) {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/helays/utils/v2/crypto/md5"
-	"github.com/helays/utils/v2/logger/ulogs"
+	"helay.net/go/utils/v3/crypto/md5"
+	"helay.net/go/utils/v3/logger/ulogs"
 )
 
 type Logs struct {

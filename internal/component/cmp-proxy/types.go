@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"net"
 
-	"github.com/helays/utils/v2/safe"
 	"golang.org/x/crypto/ssh"
+	"helay.net/go/utils/v3/safe"
 )
 
 var connectMap *safe.Map[string, *proxyConnect] // 记录数据库中所有的连接客户端信息

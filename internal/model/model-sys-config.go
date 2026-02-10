@@ -1,8 +1,8 @@
 package model
 
 import (
-	"github.com/helays/utils/v2/dataType"
 	"gorm.io/datatypes"
+	"helay.net/go/utils/v3/dataType"
 )
 
 type SysConfig struct {

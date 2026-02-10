@@ -2,9 +2,9 @@ package dal
 
 import (
 	"github.com/helays/ssh-proxy-plus/configs"
-	"github.com/helays/utils/v2/db/userDb/connect/sqliteconnect"
-	"github.com/helays/utils/v2/logger/ulogs"
 	"gorm.io/gorm"
+	"helay.net/go/utils/v3/db/userDb/connect/sqliteconnect"
+	"helay.net/go/utils/v3/logger/ulogs"
 )
 
 var db *gorm.DB

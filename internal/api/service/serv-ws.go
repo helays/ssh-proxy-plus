@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"github.com/helays/utils/v2/crypto/md5"
-	"github.com/helays/utils/v2/logger/ulogs"
-	"github.com/helays/utils/v2/net/http/request"
-	"github.com/helays/utils/v2/safe"
 	"golang.org/x/net/websocket"
+	"helay.net/go/utils/v3/crypto/md5"
+	"helay.net/go/utils/v3/logger/ulogs"
+	"helay.net/go/utils/v3/net/http/request"
+	"helay.net/go/utils/v3/safe"
 )
 
 type ServWS struct {

@@ -3,11 +3,11 @@ package configs
 import (
 	"time"
 
-	"github.com/helays/utils/v2/db"
-	"github.com/helays/utils/v2/net/http/httpServer"
-	"github.com/helays/utils/v2/net/http/httpServer/router"
-	"github.com/helays/utils/v2/net/http/session"
-	"github.com/helays/utils/v2/safe/cachemgr"
+	"helay.net/go/utils/v3/db"
+	"helay.net/go/utils/v3/net/http/httpServer"
+	"helay.net/go/utils/v3/net/http/httpServer/router"
+	"helay.net/go/utils/v3/net/http/session"
+	"helay.net/go/utils/v3/safe/cachemgr"
 )
 
 type Config struct {

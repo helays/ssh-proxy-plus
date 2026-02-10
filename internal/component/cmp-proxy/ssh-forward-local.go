@@ -3,7 +3,7 @@ package cmp_proxy
 import (
 	"net"
 
-	"github.com/helays/utils/v2/close/vclose"
+	"helay.net/go/utils/v3/close/vclose"
 )
 
 // 本地转发

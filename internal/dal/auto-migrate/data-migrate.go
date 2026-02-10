@@ -5,8 +5,8 @@ import (
 	"github.com/helays/ssh-proxy-plus/configs"
 	"github.com/helays/ssh-proxy-plus/internal/dal"
 	"github.com/helays/ssh-proxy-plus/internal/model"
-	"github.com/helays/utils/v2/logger/ulogs"
 	"gorm.io/gorm"
+	"helay.net/go/utils/v3/logger/ulogs"
 )
 
 func InitSysConfigData() {

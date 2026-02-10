@@ -4,7 +4,7 @@ import (
 	"context"
 	"github.com/helays/ssh-proxy-plus/internal/model"
 
-	"github.com/helays/utils/v2/safe"
+	"helay.net/go/utils/v3/safe"
 )
 
 var (

@@ -4,9 +4,9 @@ import (
 	"path"
 	"time"
 
-	"github.com/helays/utils/v2/config/loadAuto"
-	"github.com/helays/utils/v2/logger/ulogs"
-	"github.com/helays/utils/v2/tools"
+	"helay.net/go/utils/v3/config/loadAuto"
+	"helay.net/go/utils/v3/logger/ulogs"
+	"helay.net/go/utils/v3/tools"
 )
 
 var conf = new(Config)

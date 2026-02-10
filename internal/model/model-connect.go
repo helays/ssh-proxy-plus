@@ -2,7 +2,7 @@ package model
 
 import (
 	"github.com/helays/ssh-proxy-plus/internal/types"
-	"github.com/helays/utils/v2/dataType"
+	"helay.net/go/utils/v3/dataType"
 )
 
 type Connect struct {

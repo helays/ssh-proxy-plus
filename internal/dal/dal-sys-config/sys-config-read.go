@@ -5,7 +5,7 @@ import (
 	"github.com/helays/ssh-proxy-plus/internal/dal"
 	"github.com/helays/ssh-proxy-plus/internal/model"
 
-	"github.com/helays/utils/v2/logger/ulogs"
+	"helay.net/go/utils/v3/logger/ulogs"
 )
 
 // ReadSysConfig2Cache 读取系统配置 到内存
