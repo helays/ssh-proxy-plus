@@ -2,9 +2,11 @@ package auto_migrate
 
 import (
 	"errors"
+
 	"github.com/helays/ssh-proxy-plus/configs"
 	"github.com/helays/ssh-proxy-plus/internal/dal"
 	"github.com/helays/ssh-proxy-plus/internal/model"
+	"github.com/helays/ssh-proxy-plus/internal/types"
 	"gorm.io/gorm"
 	"helay.net/go/utils/v3/logger/ulogs"
 )
@@ -13,7 +15,7 @@ func InitSysConfigData() {
 	cfg := configs.Get()
 	if cfg.Common.EnableAliEcs {
 		setDefaultSysConfig(model.SysConfig{
-			Prop:  "access_key_id",
+			Prop:  types.AccessKeyID,
 			Label: "阿里云RAM ID",
 			Name:  "el-input",
 			Type:  "text",
@@ -25,7 +27,7 @@ func InitSysConfigData() {
 			},
 		})
 		setDefaultSysConfig(model.SysConfig{
-			Prop:  "access_key_secret",
+			Prop:  types.AccessKeySecret,
 			Label: "阿里云RAM Secret",
 			Name:  "el-input",
 			Type:  "password",
@@ -39,7 +41,7 @@ func InitSysConfigData() {
 		})
 	}
 	setDefaultSysConfig(model.SysConfig{
-		Prop:  "sys_pass",
+		Prop:  types.SysPass,
 		Label: "系统通行证",
 		Name:  "el-input",
 		Type:  "password",
@@ -48,6 +50,39 @@ func InitSysConfigData() {
 			"props": map[string]any{
 				"placeholder":  "请输入系统通行证",
 				"autocomplete": "on",
+			},
+		},
+	})
+	setDefaultSysConfig(model.SysConfig{
+		Prop:  types.ProxyAddr,
+		Label: "系统代理",
+		Name:  "el-input",
+		Type:  "text",
+		Component: map[string]any{
+			"props": map[string]any{
+				"placeholder": "系统http客户端使用的代理，socks5|http://ip:port",
+			},
+		},
+	})
+	setDefaultSysConfig(model.SysConfig{
+		Prop:  types.Socks5Port,
+		Label: "socks5端口",
+		Name:  "el-input",
+		Type:  "text",
+		Component: map[string]any{
+			"props": map[string]any{
+				"placeholder": "公共socks5端口",
+			},
+		},
+	})
+	setDefaultSysConfig(model.SysConfig{
+		Prop:  types.HttpPort,
+		Label: "http端口",
+		Name:  "el-input",
+		Type:  "text",
+		Component: map[string]any{
+			"props": map[string]any{
+				"placeholder": "公共http端口",
 			},
 		},
 	})

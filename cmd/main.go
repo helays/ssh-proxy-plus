@@ -5,6 +5,8 @@ import (
 	"encoding/gob"
 	"fmt"
 
+	"github.com/helays/ssh-proxy-plus/internal/component/proxyspider"
+	"github.com/helays/ssh-proxy-plus/internal/component/publicproxy"
 	"helay.net/go/utils/v3/close/vclose"
 	"helay.net/go/utils/v3/config/parseCmd"
 	"helay.net/go/utils/v3/logger/ulogs"
@@ -109,6 +111,8 @@ func main() {
 	cache.ConnectList.ReadWith(func(connects []model.Connect) {
 		cmp_proxy.StartList(connects)
 	})
+	proxyspider.RunSpider(ctx) // 启用 代理爬虫
+	publicproxy.RunProxy(ctx)  // 启用 公共代理
 
 	api.InitRouter()
 	cfg.HttpServer.HttpServerStart(ctx)

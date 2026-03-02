@@ -3,9 +3,12 @@ package controller
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/helays/ssh-proxy-plus/configs"
 	"github.com/helays/ssh-proxy-plus/internal/api/dto"
 	"github.com/helays/ssh-proxy-plus/internal/cache"
+	"github.com/helays/ssh-proxy-plus/internal/types"
+
 	"net/http"
 	"time"
 
@@ -54,7 +57,7 @@ func (c *Controller) CtlLogin(w http.ResponseWriter, r *http.Request) {
 		response.SetReturnErrorDisableLog(w, err, http.StatusForbidden, "密码数据异常")
 		return
 	}
-	if sysPass, ok := cache.SysConfig.Load("sys_pass"); !ok {
+	if sysPass, ok := cache.SysConfig.Load(types.SysPass); !ok {
 		response.SetReturnErrorDisableLog(w, fmt.Errorf("系统密码未配置"), http.StatusForbidden)
 		return
 	} else if sysPass.Value != string(_pass) {

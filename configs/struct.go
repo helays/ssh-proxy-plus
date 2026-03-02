@@ -31,6 +31,8 @@ type Common struct {
 	EnablePass        bool          `ini:"enable_pass" json:"enable_pass" yaml:"enable_pass"`                            // 启用系统登录
 	EnableAliEcs      bool          `ini:"enable_ali_ecs" json:"enable_ali_ecs" yaml:"enable_ali_ecs"`                   // 开启阿里ECS
 	RingBufferLogSize int           `ini:"log_ring_buffer_size" yaml:"log_ring_buffer_size" json:"log_ring_buffer_size"` // 环形缓冲区 日志 大小
+	EnablePublicProxy bool          `ini:"enable_public_proxy" json:"enable_public_proxy" yaml:"enable_public_proxy"`    // 启用公共代理
+	ProxyCheckTimeout time.Duration `ini:"proxy_check_timeout" json:"proxy_check_timeout" yaml:"proxy_check_timeout"`    // 代理检测超时
 }
 
 type SessionConfig struct {
