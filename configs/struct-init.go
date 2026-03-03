@@ -30,7 +30,9 @@ func setDefault() {
 	conf.Common.SshTimeout = tools.AutoTimeDuration(conf.Common.SshTimeout, time.Second, 30*time.Second)
 	conf.Common.RingBufferLogSize = tools.Ternary(conf.Common.RingBufferLogSize == 0, 1024, conf.Common.RingBufferLogSize)
 
-	conf.Common.ProxyCheckTimeout = tools.AutoTimeDuration(conf.Common.ProxyCheckTimeout, time.Second, 10*time.Second)
+	conf.Common.ConnectTimeout = tools.AutoTimeDuration(conf.Common.ConnectTimeout, time.Second, 10*time.Second)
+	conf.Common.SpeedTestTimeout = tools.AutoTimeDuration(conf.Common.SpeedTestTimeout, time.Second, 60*time.Second)
+	conf.Common.CheckMaxThread = tools.Ternary(conf.Common.CheckMaxThread < 1, 10, conf.Common.CheckMaxThread)
 }
 
 func Get() *Config {

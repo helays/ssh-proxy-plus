@@ -64,28 +64,6 @@ func InitSysConfigData() {
 			},
 		},
 	})
-	setDefaultSysConfig(model.SysConfig{
-		Prop:  types.Socks5Port,
-		Label: "socks5端口",
-		Name:  "el-input",
-		Type:  "text",
-		Component: map[string]any{
-			"props": map[string]any{
-				"placeholder": "公共socks5端口",
-			},
-		},
-	})
-	setDefaultSysConfig(model.SysConfig{
-		Prop:  types.HttpPort,
-		Label: "http端口",
-		Name:  "el-input",
-		Type:  "text",
-		Component: map[string]any{
-			"props": map[string]any{
-				"placeholder": "公共http端口",
-			},
-		},
-	})
 }
 
 func setDefaultSysConfig(value model.SysConfig) {

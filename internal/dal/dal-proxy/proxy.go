@@ -24,14 +24,29 @@ func SaveProxy(proxy *model.ProxyInfo) error {
 
 func UpdateProxy(proxy *model.ProxyInfo) error {
 	db := dal.GetDB()
-	return db.Model(proxy).Where(clause.Eq{Column: "address", Value: proxy.Address}).Updates(proxy).Error
+	tx := db.Where("id=?", proxy.Id).Select("latency", "speed", "score", "last_check", "is_alive", "message", "port_open")
+	return tx.Updates(proxy).Error
 }
 
-func FindAllProxes() ([]*model.ProxyInfo, error) {
+func FindAllProxes() ([]model.ProxyInfo, error) {
 	db := dal.GetDB()
-	var lst []*model.ProxyInfo
+	var lst []model.ProxyInfo
 	if err := db.Find(&lst).Error; err != nil {
 		return nil, fmt.Errorf("查询所有代理失败 %v", err)
 	}
 	return lst, nil
+}
+
+func BestProxy() (addr string, err error) {
+	db := dal.GetDB()
+	var info model.ProxyInfo
+	tx := db.Where(clause.And(
+		clause.Eq{Column: "is_alive", Value: 1},
+		clause.Eq{Column: "port_open", Value: 1},
+	))
+	tx.Order(clause.OrderByColumn{Column: clause.Column{Name: "score"}, Desc: true})
+	if err = tx.Take(&info).Error; err != nil {
+		return
+	}
+	return info.Address, nil
 }

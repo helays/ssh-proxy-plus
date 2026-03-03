@@ -27,9 +27,9 @@ func (p *proxyConnect) forwardHTTP() {
 		Addr: p.connect.Listen,
 		Handler: http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			if r.Method == http.MethodConnect {
-				p.handleTunneling(w, r, dialer)
+				HandleTunneling(w, r, dialer)
 			} else {
-				p.handleHTTP(w, r, dialer)
+				HandleHTTP(w, r, dialer)
 			}
 		}),
 	}
@@ -46,7 +46,7 @@ func (p *proxyConnect) forwardHTTP() {
 	p.logs("HTTP代理停止")
 }
 
-func (p *proxyConnect) handleTunneling(w http.ResponseWriter, r *http.Request, dialer proxy.Dialer) {
+func HandleTunneling(w http.ResponseWriter, r *http.Request, dialer proxy.Dialer) {
 	destConn, err := dialer.Dial("tcp", r.Host)
 	defer vclose.Close(destConn)
 	if err != nil {
@@ -64,10 +64,10 @@ func (p *proxyConnect) handleTunneling(w http.ResponseWriter, r *http.Request, d
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusServiceUnavailable)
 	}
-	transfer(destConn, clientConn)
+	Transfer(destConn, clientConn)
 }
 
-func (p *proxyConnect) handleHTTP(w http.ResponseWriter, r *http.Request, dialer proxy.Dialer) {
+func HandleHTTP(w http.ResponseWriter, r *http.Request, dialer proxy.Dialer) {
 	transport := &http.Transport{
 		DialContext: func(ctx context.Context, network, addr string) (net.Conn, error) {
 			return dialer.Dial(network, addr)
@@ -75,7 +75,7 @@ func (p *proxyConnect) handleHTTP(w http.ResponseWriter, r *http.Request, dialer
 		IdleConnTimeout:     90 * time.Second,
 		TLSHandshakeTimeout: 20 * time.Second,
 	}
-	p.prepareProxyRequest(r)
+	prepareProxyRequest(r)
 	client := &http.Client{
 		Transport: transport,
 	}
@@ -91,7 +91,7 @@ func (p *proxyConnect) handleHTTP(w http.ResponseWriter, r *http.Request, dialer
 
 }
 
-func (p *proxyConnect) prepareProxyRequest(r *http.Request) {
+func prepareProxyRequest(r *http.Request) {
 	r.RequestURI = "" // 必须清空
 
 	// 确保URL有完整的主机信息
