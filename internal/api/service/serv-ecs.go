@@ -13,6 +13,7 @@ import (
 	"github.com/helays/ssh-proxy-plus/internal/dal"
 	dal_connect "github.com/helays/ssh-proxy-plus/internal/dal/dal-connect"
 	"github.com/helays/ssh-proxy-plus/internal/model"
+	"github.com/helays/ssh-proxy-plus/internal/types"
 
 	openapi "github.com/alibabacloud-go/darabonba-openapi/v2/client"
 	ecs20140526 "github.com/alibabacloud-go/ecs-20140526/v4/client"
@@ -35,12 +36,12 @@ func NewECS() (*EcsService, error) {
 	srv := EcsService{
 		cfg: configs.Get(),
 	}
-	if accessKeyId, ok := cache.SysConfig.Load("access_key_id"); !ok || accessKeyId.Value == "" {
+	if accessKeyId, ok := cache.SysConfig.Load(types.AccessKeyID); !ok || accessKeyId.Value == "" {
 		return nil, fmt.Errorf("请先配置阿里云密钥 Access Key ID")
 	} else {
 		srv.accessKeyId = accessKeyId.Value
 	}
-	if accessKeySecret, ok := cache.SysConfig.Load("access_key_secret"); !ok || accessKeySecret.Value == "" {
+	if accessKeySecret, ok := cache.SysConfig.Load(types.AccessKeySecret); !ok || accessKeySecret.Value == "" {
 		return nil, fmt.Errorf("请先配置阿里云密钥 Access Key Secret")
 	} else {
 		srv.accessKeySecret = accessKeySecret.Value

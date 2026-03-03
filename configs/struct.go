@@ -31,6 +31,12 @@ type Common struct {
 	EnablePass        bool          `ini:"enable_pass" json:"enable_pass" yaml:"enable_pass"`                            // 启用系统登录
 	EnableAliEcs      bool          `ini:"enable_ali_ecs" json:"enable_ali_ecs" yaml:"enable_ali_ecs"`                   // 开启阿里ECS
 	RingBufferLogSize int           `ini:"log_ring_buffer_size" yaml:"log_ring_buffer_size" json:"log_ring_buffer_size"` // 环形缓冲区 日志 大小
+	EnablePublicProxy bool          `ini:"enable_public_proxy" json:"enable_public_proxy" yaml:"enable_public_proxy"`    // 启用公共代理
+	CheckMaxThread    int           `ini:"check_max_thread" json:"check_max_thread" yaml:"check_max_thread"`             // 检测最大线程
+	ConnectTimeout    time.Duration `ini:"connect_timeout" json:"connect_timeout" yaml:"connect_timeout"`                // 连接超时
+	SpeedTestTimeout  time.Duration `ini:"speed_test_timeout" json:"speed_test_timeout" yaml:"speed_test_timeout"`       // 测速超时
+	Socks5Port        string        `ini:"socks5_port" json:"socks5_port" yaml:"socks5_port"`                            // socks5端口
+	HttpPort          string        `ini:"http_port" json:"http_port" yaml:"http_port"`                                  // http端口
 }
 
 type SessionConfig struct {

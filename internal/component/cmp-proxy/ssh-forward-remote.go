@@ -74,7 +74,7 @@ func (p *proxyConnect) forwardRemote() {
 				p.error("远程转发 %s TCP 监听失败 %v", p.connect.Listen, _e)
 				return
 			}
-			transfer(_s, conn)
+			Transfer(_s, conn)
 
 		}(client)
 	}

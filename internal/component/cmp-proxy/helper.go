@@ -96,8 +96,8 @@ func killProcess(client *ssh.Client, pid int) error {
 	return nil
 }
 
-// 这是双向数据转发，对于其中一方Copy结束时，另一方都应该关闭资源。
-func transfer(dst net.Conn, src net.Conn) {
+// Transfer 这是双向数据转发，对于其中一方Copy结束时，另一方都应该关闭资源。
+func Transfer(dst net.Conn, src net.Conn) {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
 	go func() {
@@ -114,7 +114,6 @@ func transfer(dst net.Conn, src net.Conn) {
 	}()
 	<-ctx.Done()
 	time.Sleep(100 * time.Millisecond) // 短暂等待100 ms
-
 }
 
 func FindConnectByID(id string) (result *model.Connect) {
