@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import {onBeforeMount, reactive, ref} from 'vue';
+import {reactive, ref} from 'vue';
 import {deepCopyJson, handleCopy} from "@/components/ts/utils";
 import TableTool from "@/components/page/tableTool.vue";
 import {sendRequest} from "@/components/ts/axios";
-import {MessageBox, Plus, Refresh} from "@element-plus/icons-vue";
+import { Plus, Refresh} from "@element-plus/icons-vue";
 import {ElMessage} from "element-plus";
 
 
@@ -188,7 +188,6 @@ const proxyCreate=()=>{
     </template>
 
     <template #default>
-      <el-table-column prop="id" width="80" label="编号"/>
       <el-table-column label="代理地址">
         <template v-slot="{ row }">
           <el-tag type="primary" @dblclick="handleCopy(row.address)" class="unselect cur-pointer">{{ row.address }}</el-tag>

@@ -4,13 +4,15 @@ import {RouterView, useRouter} from 'vue-router'
 import {CatchMessageNotification} from '@/components/RespTools.vue'
 import {sendRequest} from "@/components/ts/axios";
 
-const router = useRouter()
-const currentRoute = window.location.hash.substring(1) || '/';
+const router = useRouter();
+const fullUrl=new URL(window.location.hash.substring(1),window.location.origin);
+const currentRoute = fullUrl.pathname || '/';
 // const currentRoute = window.location.pathname === '/' ? window.location.pathname : window.location.pathname.substring(1)
 const enablePass = (window as any)["enable_pass"];
 // 使用计算属性以确保当路由变化时，菜单能响应更新
 
 let computedRoutes:Record<any, any>[]=[];
+
 
 if(localStorage.getItem("menu")){
   try {
