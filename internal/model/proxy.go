@@ -9,7 +9,7 @@ import (
 
 type ProxyInfo struct {
 	Id      int             `json:"id" gorm:"primaryKey;int;autoIncrement"`
-	Address string          `json:"address" gorm:"size:128;not null;uniqueIndex;comment:代理地址"`
+	Address string          `json:"address" gorm:"size:128;not null;uniqueIndex;comment:代理地址" dblike:"%"`
 	Type    types.ProxyType `json:"type" gorm:"not null;comment:代理类型"`
 
 	Latency    time.Duration        `json:"latency" gorm:"comment:延迟"`

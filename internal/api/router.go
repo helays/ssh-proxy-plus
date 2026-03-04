@@ -34,6 +34,14 @@ func InitRouter() {
 
 	rootGroup.Ws("/data.api", ctl.CtlWSDataApi)
 
+	if cfg.Common.EnablePublicProxy {
+		rootGroup.Get("/proxy/list", ctl.CtlProxyList)               // 代理列表
+		rootGroup.Post("/proxy/create", ctl.CtlProxyCreate)          // 新增代理
+		rootGroup.Post("/proxy/update-best", ctl.CtlProxyUpdateBest) // 更新最优代理
+		rootGroup.Post("/proxy/test", ctl.CtlProxyTest)              // 测试代理
+		rootGroup.Post("/proxy/delete", ctl.CtlProxyDelete)          // 删除代理
+	}
+
 	// 阿里 ecs 接口
 	if cfg.Common.EnableAliEcs {
 		rootGroup.Get("/describe.regions", ctl.CtlDescribeRegions)

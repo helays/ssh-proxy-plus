@@ -34,7 +34,7 @@ func check(ctx context.Context) {
 		default:
 		}
 		doCheck(ctx)
-		time.Sleep(time.Minute)
+		time.Sleep(time.Minute * 10)
 	}
 }
 
@@ -47,7 +47,6 @@ func doCheck(ctx context.Context) {
 	}
 	proxyTotals := len(proxyList)
 	startTime := time.Now()
-	cfg := configs.Get().Common
 	wg := sync.WaitGroup{}
 	maxConcurrent := 10 // 设置最大并发数，可以根据需要调整
 	semaphore := make(chan struct{}, maxConcurrent)
@@ -60,15 +59,7 @@ func doCheck(ctx context.Context) {
 				<-semaphore
 			}()
 			p := proxyList[idx]
-			p.IsAlive = dataType.NewBool(false)
-			p.PortOpen = dataType.NewBool(false)
-			p.Latency = 0
-			p.Speed = 0
-			p.Score = 0
-			p.LastCheck = new(dataType.NewCustomTimeNow())
-			pc := proxyCheck{ctx: ctx, proxy: &p, connectTimeout: cfg.ConnectTimeout, speedTestTimeout: cfg.SpeedTestTimeout}
-			pc.check()
-			if upErr := dal_proxy.UpdateProxy(pc.proxy); upErr != nil {
+			if upErr := DoCheckProxy(ctx, p); upErr != nil {
 				ulogs.Errorf("更新代理失败 %v", upErr)
 			}
 			//ulogs.Infof("代理 %s 检测完成,结果 %s,可用 %v,延迟 %v,速度 %d,综合评分 %.2f\n", p.Address, p.Message, p.IsAlive, p.Latency, p.Speed, p.Score)
@@ -78,12 +69,22 @@ func doCheck(ctx context.Context) {
 	if proxyTotals > 0 {
 		wg.Wait()
 	}
-	var addr string
-	if addr, err = dal_proxy.BestProxy(); err == nil {
-		SetPublicProxy(addr)
-		ulogs.Info("最优代理", addr)
-	}
+	UpdateBestProxy() // 更新最优代理
 	ulogs.Infof("代理检测完成,总数 %d,耗时 %v\n", proxyTotals, time.Since(startTime))
+}
+
+// DoCheckProxy 检测代理
+func DoCheckProxy(ctx context.Context, p model.ProxyInfo) error {
+	p.IsAlive = dataType.NewBool(false)
+	p.PortOpen = dataType.NewBool(false)
+	p.Latency = 0
+	p.Speed = 0
+	p.Score = 0
+	p.LastCheck = new(dataType.NewCustomTimeNow())
+	cfg := configs.Get().Common
+	pc := proxyCheck{ctx: ctx, proxy: &p, connectTimeout: cfg.ConnectTimeout, speedTestTimeout: cfg.SpeedTestTimeout}
+	pc.check()
+	return dal_proxy.UpdateProxy(pc.proxy)
 }
 
 type proxyCheck struct {
