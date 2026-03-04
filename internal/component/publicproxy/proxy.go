@@ -51,15 +51,19 @@ type proxyServer struct {
 	http   string
 }
 
+func UpdateBestProxy() {
+	if addr, err := dal_proxy.BestProxy(); err == nil {
+		SetPublicProxy(addr)
+		ulogs.Info("最优代理", addr)
+	}
+}
+
 func RunProxy(ctx context.Context) {
 	cfg := configs.Get().Common
 	if !cfg.EnablePublicProxy {
 		return
 	}
-	if addr, err := dal_proxy.BestProxy(); err == nil {
-		SetPublicProxy(addr)
-		ulogs.Info("最优代理", addr)
-	}
+	UpdateBestProxy()
 	go check(ctx) // 运行检测服务
 	serv := proxyServer{
 		socks5: cfg.Socks5Port,

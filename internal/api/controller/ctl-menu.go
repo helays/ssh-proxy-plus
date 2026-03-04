@@ -1,9 +1,10 @@
 package controller
 
 import (
+	"net/http"
+
 	"github.com/helays/ssh-proxy-plus/configs"
 	"github.com/helays/ssh-proxy-plus/internal/api/dto"
-	"net/http"
 
 	"helay.net/go/utils/v3/net/http/httpServer/router"
 	"helay.net/go/utils/v3/net/http/response"
@@ -18,6 +19,16 @@ var frontendLists = []dto.FrontedResp{
 		Component: "HomeView",
 		Meta: map[string]any{
 			"title":        "首页",
+			"require_auth": true,
+		},
+	},
+	{
+		Path:      "/page/proxy",
+		Name:      "公共代理",
+		Mod:       "proxy",
+		Component: "ProxyView",
+		Meta: map[string]any{
+			"title":        "公共代理",
 			"require_auth": true,
 		},
 	},
@@ -47,6 +58,9 @@ func (c *Controller) CtlMenuLists(w http.ResponseWriter, r *http.Request) {
 	var resp []dto.FrontedResp
 	cfg := configs.Get()
 	for _, v := range frontendLists {
+		if !cfg.Common.EnablePublicProxy && v.Mod == "proxy" {
+			continue
+		}
 		if !cfg.Common.EnableAliEcs && v.Mod == "ali" {
 			continue
 		}
@@ -78,5 +92,5 @@ func (c *Controller) CtlMenuLists(w http.ResponseWriter, r *http.Request) {
 	if cfg.Common.EnablePass {
 		respData["islogin"] = userInfo.IsLogin
 	}
-	response.SetReturnCode(w, r, 0, "成功", respData)
+	response.SetReturnData(w, 0, "成功", respData)
 }

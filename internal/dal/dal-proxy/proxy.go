@@ -28,6 +28,21 @@ func UpdateProxy(proxy *model.ProxyInfo) error {
 	return tx.Updates(proxy).Error
 }
 
+func DeleteProxy(id int) error {
+	db := dal.GetDB()
+	tx := db.Where(clause.Eq{Column: "id", Value: id}).Delete(&model.ProxyInfo{})
+	return tx.Error
+}
+
+func GetProxy(id int, info *model.ProxyInfo) error {
+	db := dal.GetDB()
+	tx := db.Where(clause.Eq{Column: "id", Value: id})
+	if err := tx.Take(&info).Error; err != nil {
+		return fmt.Errorf("查询代理 %d 失败 %v", id, err)
+	}
+	return nil
+}
+
 func FindAllProxes() ([]model.ProxyInfo, error) {
 	db := dal.GetDB()
 	var lst []model.ProxyInfo

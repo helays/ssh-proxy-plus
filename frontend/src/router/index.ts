@@ -17,6 +17,7 @@ const router = createRouter({
     history: createWebHashHistory(), // 使用 hash方式
     routes: [
         {
+
             path: '/page/login',
             name: '登录',
             component: ()=>import('@/layouts/LoginLayout.vue'),
