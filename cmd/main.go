@@ -61,6 +61,9 @@ import (
 func init() {
 	parseCmd.Parseparams()
 	configs.Init()
+
+	ulogs.Start()
+
 	dal.Init()
 	auto_migrate.AutoMigrate()
 	auto_migrate.InitSysConfigData()
@@ -101,6 +104,7 @@ func main() {
 	cfg := configs.Get()
 	go signalTools.SignalHandle(func() {
 		cancel()
+		ulogs.Shutdown()
 	})
 	initSession(ctx)
 	cache.Init(ctx)
