@@ -11,6 +11,7 @@ import (
 	"github.com/helays/ssh-proxy-plus/configs"
 	cmp_proxy "github.com/helays/ssh-proxy-plus/internal/component/cmp-proxy"
 	dal_proxy "github.com/helays/ssh-proxy-plus/internal/dal/dal-proxy"
+	"github.com/helays/ssh-proxy-plus/internal/types"
 	"golang.org/x/net/proxy"
 	"helay.net/go/utils/v3/close/httpClose"
 	"helay.net/go/utils/v3/close/vclose"
@@ -105,14 +106,29 @@ func (p *proxyServer) handleSOCKS5(clientConn net.Conn) {
 		ulogs.Error("公共代理未设置")
 		return
 	}
-	_, dialer, err := parseProxyAddr(px, 0)
+	u, dialer, err := parseProxyAddr(px, 0)
 	if err != nil {
 		ulogs.Errorf("公共代理 %s 拨号器创建失败 %v\n", px, err)
+		return
+	}
+	if types.ProxyType(u.Scheme) == types.ProxySocks5 {
+		p.handleSOCKS5Direct(clientConn, u)
 		return
 	}
 	if err = cmp_proxy.ForwardDynamic(clientConn, dialer); err != nil {
 		ulogs.Errorf("公共代理 %s 转发失败 %v\n", px, err)
 	}
+}
+
+func (p *proxyServer) handleSOCKS5Direct(clientConn net.Conn, u *url.URL) {
+	// SOCKS5 代理：直接使用 net.Dial 连接到上游 SOCKS5 代理服务器
+	proxyConn, err := net.Dial("tcp", u.Host) // 直接使用 proxyURL.Host
+	if err != nil {
+		ulogs.Errorf("连接到上游 SOCKS5 代理 %s 失败: %v", u.Host, err)
+		return
+	}
+	defer vclose.Close(proxyConn)
+	cmp_proxy.Transfer(clientConn, proxyConn)
 }
 
 func (p *proxyServer) startHttpServer(ctx context.Context) {
